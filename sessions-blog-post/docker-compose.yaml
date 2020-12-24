@@ -3,6 +3,11 @@ version: '3'
 services:
   session-tut:
     container_name: session_boi
-    context: 
-      build: .
-      dockerfile: Dockerfile 
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/session-app
+    ports:
+      - '8000:8000'
+    command: python3 src/main.py

@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  gopi:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes: 
+      - .:/gopi
+    ports: 
+      - '8080:8080'
+    command: go run test.go

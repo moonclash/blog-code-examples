@@ -9,5 +9,5 @@ services:
     volumes:
       - .:/session-app
     ports:
-      - '8000:8000'
+      - '8080:8080'
     command: python3 src/main.py

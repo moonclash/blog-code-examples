@@ -1,7 +1,7 @@
 package main
 
 import "github.com/gin-gonic/gin"
-import "database"
+import "github.com/moonclash/blog-code-examples/gopi/database"
 
 func main() {
 	database.CreateDB()

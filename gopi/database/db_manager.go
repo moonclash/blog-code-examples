@@ -20,7 +20,6 @@ func CreateDB() {
 	checkErr(err)
 	_, err = db.Exec("CREATE TABLE IF NOT EXISTS `definitions` (`definition_id` INTEGER PRIMARY KEY AUTOINCREMENT, `short_name` VARCHAR(255), `long_name` VARCHAR(255))")
 	checkErr(err)
-	db.Close()
 }
 
 type DBManager struct {
@@ -40,8 +39,10 @@ func (_db DBManager) Initialize() {
 
 func (_db DBManager) InsertDefinition(key string, definition string) {
 	insertQuery := "INSERT INTO definitions (short_name, long_name) VALUES (?, ?)"
-	statement, _ := _db.db.Prepare(insertQuery)
+	statement, err := _db.db.Prepare(insertQuery)
+	checkErr(err)
 	statement.Exec(key, definition)
+	checkErr(err)
 }
 
 func (_db DBManager) RetrieveDefinition(key string) {

@@ -5,7 +5,7 @@ import "github.com/moonclash/blog-code-examples/gopi/database"
 
 func main() {
 	database.CreateDB()
-	DatabaseManager := database.DBManager.new("foo")
+	DatabaseManager := database.New(nil)
 	DatabaseManager.initialize()
 	router := gin.Default()
 	router.GET("/ping", func(c *gin.Context) {

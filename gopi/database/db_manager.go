@@ -14,14 +14,12 @@ func checkErr(err error) {
 	}
 }
 
-
 type DBManager struct {
-	name string
 	db *sql.DB
 }
 
-func new(name string) DBManager {
-	_db := DBManager {name, nil}
+func New(db *sql.DB) DBManager {
+	_db := DBManager {db}
 	return _db
 }
 
@@ -38,8 +36,6 @@ func (_db DBManager) InsertDefinition(key string, definition string) {
 	_, err = statement.Exec(key, definition)
 	checkErr(err)
 }
-
-
 
 
 // db, err := sql.Open("sqlite3", "./data.db")

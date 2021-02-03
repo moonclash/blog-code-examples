@@ -7,12 +7,15 @@ func main() {
 	database.CreateDB()
 	DatabaseManager := database.New(nil)
 	DatabaseManager.Initialize()
-	DatabaseManager.InsertDefinition("test", "test definition")
+	// DatabaseManager.InsertDefinition("test", "test definition")
 	router := gin.Default()
 	router.GET("/ping", func(c *gin.Context) {
 		c.JSON(200, gin.H{
 			"message": "pong",
 		})
+	})
+	router.POST("/create", func(c *gin.Context) {
+		DatabaseManager.InsertDefinition("test", "test definition")
 	})
 	router.Run()
 }

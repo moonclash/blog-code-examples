@@ -20,7 +20,6 @@ func CreateDB() {
 	checkErr(err)
 	_, err = db.Exec("CREATE TABLE IF NOT EXISTS `definitions` (`definition_id` INTEGER PRIMARY KEY AUTOINCREMENT, `short_name` VARCHAR(255), `long_name` VARCHAR(255))")
 	checkErr(err)
-	db.Close()
 }
 
 type DBManager struct {

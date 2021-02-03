@@ -14,15 +14,43 @@ func checkErr(err error) {
 	}
 }
 
-func InsertDefinition(db *sql.DB, key string, definition string) {
-	// db, err := sql.Open("sqlite3", "./data.db")
-	// checkErr(err)
+
+type DBManager struct {
+	db *sql.DB
+}
+
+func New() DBManager {
+	_db := DBManager {}
+	return _db
+}
+
+func (_db DBManager) initialize () {
+	db, err := sql.Open("sqlite3", "./data.db")
+	checkErr(err)
+	_db.db = db
+}
+
+func (_db DBManager) InsertDefinition(key string, definition string) {
 	insertQuery := `INSERT INTO definitions(short_name, long_name) VALUES (?, ?)`
-	statement, err := db.Prepare(insertQuery)
+	statement, err := _db.db.Prepare(insertQuery)
 	checkErr(err)
 	_, err = statement.Exec(key, definition)
-	checkErr(err) 
+	checkErr(err)
 }
+
+
+
+
+// db, err := sql.Open("sqlite3", "./data.db")
+// checkErr(err)
+
+// func InsertDefinition(db *sql.DB, key string, definition string) {
+// 	insertQuery := `INSERT INTO definitions(short_name, long_name) VALUES (?, ?)`
+// 	statement, err := db.Prepare(insertQuery)
+// 	checkErr(err)
+// 	_, err = statement.Exec(key, definition)
+// 	checkErr(err) 
+// }
 
 // func RetrieveDefinition() {
 // 	db := getDB()

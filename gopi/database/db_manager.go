@@ -14,14 +14,14 @@ func checkErr(err error) {
 	}
 }
 
-// func getDB() {
-// 	vardb, err := sql.Open("sqlite3", "./data.db")
-// 	checkErr(err)
-// 	return db, err
-// }
-
-func InsertDefinition() {
-
+func InsertDefinition(db *sql.DB, key string, definition string) {
+	db, err := sql.Open("sqlite3", "./data.db")
+	checkErr(err)
+	insertQuery := `INSERT INTO definitions(short_name, long_name) VALUES (?, ?)`
+	statement, err := db.Prepare(insertQuery)
+	checkErr(err)
+	_, err := statement.Exec(key, definition)
+	checkErr(err) 
 }
 
 // func RetrieveDefinition() {

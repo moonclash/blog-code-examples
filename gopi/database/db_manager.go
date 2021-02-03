@@ -16,11 +16,12 @@ func checkErr(err error) {
 
 
 type DBManager struct {
+	name string
 	db *sql.DB
 }
 
-func New() DBManager {
-	_db := DBManager {}
+func new(name string) DBManager {
+	_db := DBManager {name, nil}
 	return _db
 }
 

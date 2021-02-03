@@ -39,7 +39,7 @@ func (_db DBManager) Initialize() {
 }
 
 func (_db DBManager) InsertDefinition(key string, definition string) {
-	insertQuery := "INSERT INTO definitions(short_name, long_name) VALUES (?, ?)"
+	insertQuery := "INSERT INTO definitions (short_name, long_name) VALUES (?, ?)"
 	statement, err := _db.db.Prepare(insertQuery)
 	checkErr(err)
 	_, err = statement.Exec(key, definition)

@@ -23,7 +23,7 @@ func New(db *sql.DB) DBManager {
 	return _db
 }
 
-func (_db DBManager) initialize () {
+func (_db DBManager) initialize() {
 	db, err := sql.Open("sqlite3", "./data.db")
 	checkErr(err)
 	_db.db = db

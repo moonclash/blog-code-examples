@@ -38,6 +38,9 @@ func (_db DBManager) Initialize() {
 }
 
 func (_db DBManager) InsertDefinition(key string, definition string) {
+	db, err := sql.Open("sqlite3", "./data.db")
+	checkErr(err)
+	_db.db = db
 	insertQuery := "INSERT INTO definitions (short_name, long_name) VALUES (?, ?)"
 	statement, err := _db.db.Prepare(insertQuery)
 	checkErr(err)

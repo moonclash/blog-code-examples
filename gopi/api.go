@@ -12,6 +12,11 @@ func main() {
 			"message": "pong",
 		})
 	})
+
+	router.GET("/fetch", func(c *gin.Context) {
+		DatabaseManager.RetrieveDefinition("test")
+	})
+
 	router.POST("/create", func(c *gin.Context) {
 		DatabaseManager.InsertDefinition("test", "test definition")
 	})

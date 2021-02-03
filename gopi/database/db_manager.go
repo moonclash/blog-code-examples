@@ -47,7 +47,7 @@ func (_db DBManager) RetrieveDefinition(key string) {
 	db, err := sql.Open("sqlite3", "./data.db")
 	checkErr(err)
 	_db.db = db
-	string_query := fmt.Sprintf("select short_name, long_name from definitions where short_name = %s", key)
+	string_query := fmt.Sprintf("select short_name, long_name from definitions where short_name = '%s'", key)
 	rows, err := _db.db.Query(string_query)
 	fmt.Println(rows)
 	checkErr(err)

@@ -31,11 +31,6 @@ func New(db *sql.DB) DBManager {
 	return _db
 }
 
-func (_db DBManager) Initialize() {
-	db, err := sql.Open("sqlite3", "./data.db")
-	checkErr(err)
-	_db.db = db
-}
 
 func (_db DBManager) InsertDefinition(key string, definition string) {
 	db, err := sql.Open("sqlite3", "./data.db")
@@ -49,6 +44,9 @@ func (_db DBManager) InsertDefinition(key string, definition string) {
 }
 
 func (_db DBManager) RetrieveDefinition(key string) {
+	db, err := sql.Open("sqlite3", "./data.db")
+	checkErr(err)
+	_db.db = db
 	string_query := fmt.Sprintf("select short_name, long_name from definitions where short_name = %s", key)
 	rows, err := _db.db.Query(string_query)
 	fmt.Println(rows)

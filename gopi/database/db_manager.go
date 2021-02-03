@@ -14,6 +14,15 @@ func checkErr(err error) {
 	}
 }
 
+func CreateDB() {
+	os.Create("./data.db")
+	db, err := sql.Open("sqlite3", "./data.db")
+	checkErr(err)
+	_, err = db.Exec("CREATE TABLE IF NOT EXISTS `definitions` (`definition_id` INTEGER PRIMARY KEY AUTOINCREMENT, `short_name` VARCHAR(255), `long_name` VARCHAR(255))")
+	checkErr(err)
+	db.Close()
+}
+
 type DBManager struct {
 	db *sql.DB
 }
@@ -37,31 +46,9 @@ func (_db DBManager) InsertDefinition(key string, definition string) {
 	checkErr(err)
 }
 
-
-// db, err := sql.Open("sqlite3", "./data.db")
-// checkErr(err)
-
-// func InsertDefinition(db *sql.DB, key string, definition string) {
-// 	insertQuery := `INSERT INTO definitions(short_name, long_name) VALUES (?, ?)`
-// 	statement, err := db.Prepare(insertQuery)
-// 	checkErr(err)
-// 	_, err = statement.Exec(key, definition)
-// 	checkErr(err) 
-// }
-
-// func RetrieveDefinition() {
-// 	db := getDB()
-// }
-
-func DeleteDefinition() {
-
-}
-
-func CreateDB() {
-	os.Create("./data.db")
-	db, err := sql.Open("sqlite3", "./data.db")
+func (_db DBManager) RetrieveDefinition(key string) {
+	string_query := fmt.Sprintf("select short_name, long_name from definitions where short_name = %s", key)
+	rows, err := _db.db.Query(string_query)
+	fmt.Println(rows)
 	checkErr(err)
-	_, err = db.Exec("CREATE TABLE IF NOT EXISTS `definitions` (`definition_id` INTEGER PRIMARY KEY AUTOINCREMENT, `short_name` VARCHAR(255), `long_name` VARCHAR(255))")
-	checkErr(err)
-	db.Close()
 }

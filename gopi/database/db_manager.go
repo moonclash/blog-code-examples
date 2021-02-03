@@ -14,19 +14,19 @@ func checkErr(err error) {
 	}
 }
 
-func getDB() {
-	db, err := sql.Open("sqlite3", "./data.db")
-	checkErr(err)
-	return db
-}
+// func getDB() {
+// 	vardb, err := sql.Open("sqlite3", "./data.db")
+// 	checkErr(err)
+// 	return db, err
+// }
 
 func InsertDefinition() {
 
 }
 
-func RetrieveDefinition() {
-	db := getDB()
-}
+// func RetrieveDefinition() {
+// 	db := getDB()
+// }
 
 func DeleteDefinition() {
 

@@ -56,6 +56,6 @@ func (_db DBManager) RetrieveDefinition(key string) {
     err = rows.Scan(&short_name, &long_name)
     checkErr(err)
   }
-  rows.close()
+  rows.Close()
   fmt.Println(short_name)
 }

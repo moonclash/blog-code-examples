@@ -49,6 +49,13 @@ func (_db DBManager) RetrieveDefinition(key string) {
   _db.db = db
   string_query := fmt.Sprintf("select short_name, long_name from definitions where short_name = '%s'", key)
   rows, err := _db.db.Query(string_query)
-  fmt.Println(rows)
   checkErr(err)
+  var short_name string
+  var long_name string
+  for rows.Next() {
+    err = rows.Scan(&short_name, &long_name)
+    checkErr(err)
+  }
+  rows.close()
+  fmt.Println(short_name)
 }

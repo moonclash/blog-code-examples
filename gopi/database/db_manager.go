@@ -43,7 +43,7 @@ func (_db DBManager) InsertDefinition(key string, definition string) {
   checkErr(err)
 }
 
-func (_db DBManager) RetrieveDefinition(key string) {
+func (_db DBManager) RetrieveDefinition(key string) (string, string) {
   db, err := sql.Open("sqlite3", "./data.db")
   checkErr(err)
   _db.db = db
@@ -57,5 +57,5 @@ func (_db DBManager) RetrieveDefinition(key string) {
     checkErr(err)
   }
   rows.Close()
-  fmt.Println(short_name)
+  return short_name, long_name
 }

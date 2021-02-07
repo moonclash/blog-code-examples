@@ -16,8 +16,9 @@ func main() {
     })
   })
 
-  router.GET("/fetch", func(c *gin.Context) {
-    short_name, long_name := DatabaseManager.RetrieveDefinition("test")
+  router.GET("/fetch/:short", func(c *gin.Context) {
+    short_def := c.Param("short")
+    short_name, long_name := DatabaseManager.RetrieveDefinition(short_def)
     c.JSON(200, gin.H{
       "short_name": short_name,
       "long_name": long_name,

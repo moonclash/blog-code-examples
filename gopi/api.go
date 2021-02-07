@@ -1,9 +1,9 @@
 package main
 
 import (
+  "encoding/json"
   "github.com/gin-gonic/gin"
   "github.com/moonclash/blog-code-examples/gopi/database"
-  "fmt"
 )
 
 func main() {
@@ -25,8 +25,13 @@ func main() {
   })
 
   router.POST("/create", func(c *gin.Context) {
-    fmt.Println(c.Params)
-    DatabaseManager.InsertDefinition("test", "test definition")
+    decoder := json.NewDecoder(c.Request.Body)
+    var definitionStruct struct {
+      Short string
+      Long string
+    }
+    decoder.Decode(&definitionStruct)
+    DatabaseManager.InsertDefinition(definitionStruct.Short, definitionStruct.Long)
   })
   router.Run()
 }

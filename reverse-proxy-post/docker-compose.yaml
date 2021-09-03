@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile_nginx 
+    volumes:
+      - ./nginx.conf:/etc/nginx/
+  python-boi:
+    build: 
+      context: .
+      dockerfile: Dockerfile_python
+    volumes:
+      - ./python-app:/python-app
+    working_dir: /python-app
+    ports: 
+      - 3000:3000
+    command: python3 server.py
+  node-boi:
+    build: 
+      context: .
+      dockerfile: Dockerfile_node
+    volumes:
+      - ./node-app:/node-app
+      - /node-app/node_modules
+    working_dir: /node-app
+    ports: 
+      - 8000:8000
+    command: node server.js

@@ -1,0 +1,7 @@
+FROM python:latest
+
+WORKDIR /python-app
+
+COPY ./python-app/requirements.txt /python-app/
+
+RUN pip3 install -r requirements.txt

@@ -1,0 +1,7 @@
+FROM node:latest
+
+WORKDIR /node-app
+
+COPY ./node-app/package.json .
+
+RUN npm install
